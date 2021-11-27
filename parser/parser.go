@@ -145,6 +145,10 @@ func makeCode(stmt *ast.CreateTableStmt, opt options) (string, []string, error) 
 		}
 
 		tags := make([]string, 0, 4)
+
+		//add json tag
+		tags = append(tags, "json", colName)
+
 		// make GORM's tag
 		gormTag := strings.Builder{}
 		gormTag.WriteString("column:")
@@ -202,10 +206,6 @@ func makeCode(stmt *ast.CreateTableStmt, opt options) (string, []string, error) 
 		}
 
 		tags = append(tags, "gorm", gormTag.String())
-
-		if opt.JsonTag {
-			tags = append(tags, "json", colName)
-		}
 
 		field.Tag = makeTagStr(tags)
 
