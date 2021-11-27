@@ -104,10 +104,10 @@ func getOptions(args options) []parser.Option {
 }
 
 func main() {
-	//args := parseFlag()
-	var args options
-	args.InputFile = "input.sql"
-	args.OutputFile = "gen.go"
+	args := parseFlag()
+	// var args options
+	// args.InputFile = "input.sql"
+	// args.OutputFile = "gen.go"
 	args.GormType = true //gorm
 
 	var output io.Writer

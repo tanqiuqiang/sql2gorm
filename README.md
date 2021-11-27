@@ -5,3 +5,4 @@
 
 支持索引和comment构成
 
+go run sqlgorm.go -f input.sql -o gen.go
