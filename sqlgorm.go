@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/cascax/sql2gorm/parser"
+	"github.com/tanqiuqiang/sql2gorm/parser"
 )
 
 type options struct {
