@@ -1,5 +1,5 @@
 build:
-	go build -ldflags="-s -w" -o sqlgorm.exe sqlgorm.go
+	go build -ldflags="-s -w" sqlgorm.go
 	$(if $(shell command -v upx), upx sqlgorm)
 mac:
 	GOOS=darwin go build -ldflags="-s -w" -o sqlgorm-darwin sqlgorm.go
