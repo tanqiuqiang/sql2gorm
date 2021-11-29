@@ -156,6 +156,13 @@ func makeCode(stmt *ast.CreateTableStmt, opt options) (string, []string, error) 
 		if opt.GormType {
 			gormTag.WriteString(";type:")
 			gormTag.WriteString(col.Tp.InfoSchemaStr())
+			//add by tan : AUTO_INCREMENT 如果加到后面，会无效
+			for _, o := range col.Options {
+				switch o.Tp {
+				case ast.ColumnOptionAutoIncrement:
+					gormTag.WriteString(" AUTO_INCREMENT")
+				}
+			}
 		}
 		if isPrimaryKey[colName] {
 			gormTag.WriteString(";primary_key")
@@ -177,8 +184,8 @@ func makeCode(stmt *ast.CreateTableStmt, opt options) (string, []string, error) 
 				}
 			case ast.ColumnOptionNotNull:
 				isNotNull = true
-			case ast.ColumnOptionAutoIncrement:
-				gormTag.WriteString(";AUTO_INCREMENT")
+			// case ast.ColumnOptionAutoIncrement:
+			// 	gormTag.WriteString(";AUTO_INCREMENT")
 			case ast.ColumnOptionDefaultValue:
 				if value := getDefaultValue(o.Expr); value != "" {
 					gormTag.WriteString(";default:")
