@@ -146,6 +146,10 @@ func makeCode(stmt *ast.CreateTableStmt, opt options) (string, []string, error) 
 
 		tags := make([]string, 0, 4)
 
+		if opt.DbTag {
+			//add db tag
+			tags = append(tags, "db", colName)
+		}
 		//add json tag
 		tags = append(tags, "json", colName)
 

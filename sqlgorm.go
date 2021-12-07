@@ -14,6 +14,7 @@ type options struct {
 	Charset        string
 	Collation      string
 	JsonTag        bool
+	DbTag          bool
 	TablePrefix    string
 	ColumnPrefix   string
 	NoNullType     bool
@@ -44,6 +45,7 @@ func parseFlag() options {
 	flag.StringVar(&args.Sql, "sql", "", "input SQL")
 
 	flag.BoolVar(&args.JsonTag, "json", false, "generate json tag")
+	flag.BoolVar(&args.DbTag, "db", false, "generate db tag")
 	flag.StringVar(&args.TablePrefix, "table-prefix", "", "table name prefix")
 	flag.StringVar(&args.ColumnPrefix, "col-prefix", "", "column name prefix")
 	flag.BoolVar(&args.NoNullType, "no-null", false, "do not use Null type")
@@ -70,6 +72,9 @@ func getOptions(args options) []parser.Option {
 	}
 	if args.JsonTag {
 		opt = append(opt, parser.WithJsonTag())
+	}
+	if args.DbTag {
+		opt = append(opt, parser.WithDbTag())
 	}
 	if args.TablePrefix != "" {
 		opt = append(opt, parser.WithTablePrefix(args.TablePrefix))

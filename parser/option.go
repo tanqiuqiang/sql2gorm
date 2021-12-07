@@ -14,6 +14,7 @@ type options struct {
 	Charset        string
 	Collation      string
 	JsonTag        bool
+	DbTag          bool
 	TablePrefix    string
 	ColumnPrefix   string
 	NoNullType     bool
@@ -55,6 +56,12 @@ func WithColumnPrefix(p string) Option {
 func WithJsonTag() Option {
 	return func(o *options) {
 		o.JsonTag = true
+	}
+}
+
+func WithDbTag() Option {
+	return func(o *options) {
+		o.DbTag = true
 	}
 }
 
