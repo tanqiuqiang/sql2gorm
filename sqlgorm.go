@@ -52,7 +52,7 @@ func parseFlag() options {
 	flag.StringVar(&args.NullStyle, "null-style", "",
 		"null type: sql.NullXXX(use 'sql') or *xxx(use 'ptr')")
 	flag.StringVar(&args.Package, "pkg", "", "package name, default: model")
-	flag.BoolVar(&args.GormType, "with-type", false, "write type in gorm tag")
+	flag.BoolVar(&args.GormType, "gorm", false, "write type in gorm tag")
 	flag.BoolVar(&args.ForceTableName, "with-tablename", false, "write TableName func force")
 
 	flag.StringVar(&args.MysqlDsn, "db-dsn", "", "mysql dsn([user]:[pass]@/[database][?charset=xxx&...])")
@@ -113,7 +113,9 @@ func main() {
 	// var args options
 	// args.InputFile = "input.sql"
 	// args.OutputFile = "gen.go"
-	args.GormType = true //gorm
+	// args.GormType = true //gorm
+
+	//go run sqlgorm.go -f input.sql -db -gorm -o gen.go
 
 	var output io.Writer
 	if args.OutputFile != "" {
